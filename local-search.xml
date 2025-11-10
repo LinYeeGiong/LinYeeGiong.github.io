@@ -4,13 +4,19 @@
   
   
   <entry>
-    <title>第一篇：测试文章</title>
-    <link href="/2025/11/10/%E7%AC%AC%E4%B8%80%E7%AF%87%EF%BC%9A%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
-    <url>/2025/11/10/%E7%AC%AC%E4%B8%80%E7%AF%87%EF%BC%9A%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
+    <title>追风的第一篇博客</title>
+    <link href="/2025/11/10/%E8%BF%BD%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2025/11/10/%E8%BF%BD%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>这是我的第一篇博客，起因是感慨研一上已经过去两个月了，貌似还是无所事事，于是想着来记录点什么，留下点什么，所以在应用信息论这节晚课上，依托hexo与github搭建了这个树洞，希望接下来能好好记录，沉淀下来！</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>随笔</tag>
+      
+    </tags>
     
   </entry>
   
