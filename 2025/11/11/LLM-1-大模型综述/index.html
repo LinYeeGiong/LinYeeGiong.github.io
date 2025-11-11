@@ -19,22 +19,25 @@
   <meta name="author" content="Linyef">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是我的第一篇博客，起因是感慨研一上已经过去两个月了，貌似还是无所事事，于是想着来记录点什么，留下点什么，所以在应用信息论这节晚课上，依托hexo与github搭建了这个树洞，希望接下来能好好记录，沉淀下来！">
+    <meta name="description" content="1、基于大模型对话的系统架构，宏观视角   一条路径是Prompt工程 另一条路径是微调   2、大模型发展的四个阶段 非神经网络时代的完全监督学习 逻辑回归、支持向量机、朴素贝叶斯   基于神经网络的完全监督学习 word2vec   预训练，精调范式（Pre-train，Fine-tune） Bert、GPT、Bart   预训练，提示、预测范式（Pre-train，Prompt， Predi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="追风的第一篇博客">
-<meta property="og:url" content="http://example.com/2025/11/10/%E8%BF%BD%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="LLM-1.大模型综述">
+<meta property="og:url" content="http://example.com/2025/11/11/LLM-1-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%BC%E8%BF%B0/index.html">
 <meta property="og:site_name" content="LinYeeGiong">
-<meta property="og:description" content="这是我的第一篇博客，起因是感慨研一上已经过去两个月了，貌似还是无所事事，于是想着来记录点什么，留下点什么，所以在应用信息论这节晚课上，依托hexo与github搭建了这个树洞，希望接下来能好好记录，沉淀下来！">
+<meta property="og:description" content="1、基于大模型对话的系统架构，宏观视角   一条路径是Prompt工程 另一条路径是微调   2、大模型发展的四个阶段 非神经网络时代的完全监督学习 逻辑回归、支持向量机、朴素贝叶斯   基于神经网络的完全监督学习 word2vec   预训练，精调范式（Pre-train，Fine-tune） Bert、GPT、Bart   预训练，提示、预测范式（Pre-train，Prompt， Predi">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-11-10T14:33:26.000Z">
-<meta property="article:modified_time" content="2025-11-10T14:40:53.571Z">
+<meta property="og:image" content="c:\Users\LinYFeng\Desktop\hexo-blog\source_posts\assets\image-20251111232522172.png">
+<meta property="og:image" content="c:\Users\LinYFeng\Desktop\hexo-blog\source_posts\assets\image-20251111235817641.png">
+<meta property="article:published_time" content="2025-11-11T15:22:10.000Z">
+<meta property="article:modified_time" content="2025-11-11T16:26:29.175Z">
 <meta property="article:author" content="Linyef">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:\Users\LinYFeng\Desktop\hexo-blog\source_posts\assets\image-20251111232522172.png">
   
   
   
-  <title>追风的第一篇博客 - LinYeeGiong</title>
+  <title>LLM-1.大模型综述 - LinYeeGiong</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="追风的第一篇博客"></span>
+            <span id="subtitle" data-typed-text="LLM-1.大模型综述"></span>
           
         </div>
 
@@ -224,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-10 22:33" pubdate>
-          2025年11月10日 晚上
+        <time datetime="2025-11-11 23:22" pubdate>
+          2025年11月11日 晚上
         </time>
       </span>
     
@@ -236,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          86 字
+          769 字
         
       </span>
     
@@ -247,7 +250,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -293,13 +296,157 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">追风的第一篇博客</h1>
+            <h1 id="seo-header">LLM-1.大模型综述</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是我的第一篇博客，起因是感慨研一上已经过去两个月了，貌似还是无所事事，于是想着来记录点什么，留下点什么，所以在应用信息论这节晚课上，依托hexo与github搭建了这个树洞，希望接下来能好好记录，沉淀下来！</p>
-
+                <h2 id="1、基于大模型对话的系统架构，宏观视角"><a href="#1、基于大模型对话的系统架构，宏观视角" class="headerlink" title="1、基于大模型对话的系统架构，宏观视角"></a>1、基于大模型对话的系统架构，宏观视角</h2><p><img src="C:\Users\LinYFeng\Desktop\hexo-blog\source_posts\assets\image-20251111232522172.png" srcset="/img/loading.gif" lazyload alt="image-20251111232522172"></p>
+<blockquote>
+<ul>
+<li>一条路径是Prompt工程</li>
+<li>另一条路径是微调</li>
+</ul>
+</blockquote>
+<h2 id="2、大模型发展的四个阶段"><a href="#2、大模型发展的四个阶段" class="headerlink" title="2、大模型发展的四个阶段"></a>2、大模型发展的四个阶段</h2><ul>
+<li>非神经网络时代的完全监督学习<ul>
+<li>逻辑回归、支持向量机、朴素贝叶斯</li>
+</ul>
+</li>
+<li>基于神经网络的完全监督学习<ul>
+<li>word2vec</li>
+</ul>
+</li>
+<li>预训练，精调范式（Pre-train，Fine-tune）<ul>
+<li>Bert、GPT、Bart</li>
+</ul>
+</li>
+<li>预训练，提示、预测范式（Pre-train，Prompt， Predict）也叫零样本学习Zero-shot<ul>
+<li>GPT2、GPT3、羊驼、ChatGlm</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Fine-tuning和Prompting的区别</p>
+<ul>
+<li>Fine-tuning是改变模型去契合任务</li>
+<li>Prompting是任务+提示词来让模型有正确的输出；不改变模型本身，模型本身足够强大，所以也称为AGI通用人工智能</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>范式</th>
+<th>第1、2种范式：完全监督学习 (Fully Supervised Learning；非神经网络和神经网络)</th>
+<th>第3种范式：预训练-微调</th>
+<th>第4种范式：预训练-提示学习</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>训练数据</strong></td>
+<td>目标任务数据集</td>
+<td>大规模生语料、目标任务数据集</td>
+<td>大规模生语料、目标任务数据集</td>
+</tr>
+<tr>
+<td><strong>输入</strong></td>
+<td>我是谁？</td>
+<td>我是谁？</td>
+<td>[CLS] 我是谁？ [SEP] <br>[MASK] 我是 [MASK] [SEP]</td>
+</tr>
+<tr>
+<td><strong>输出</strong></td>
+<td>[0,0,1]</td>
+<td>[0,0,1]</td>
+<td>[CLS] 哲学 [SEP]</td>
+</tr>
+<tr>
+<td><strong>输出层</strong></td>
+<td>一个线性变换</td>
+<td>一个线性变换</td>
+<td>无新增结构</td>
+</tr>
+<tr>
+<td><strong>特点</strong></td>
+<td>依赖目标任务数据集来获得文本表示。</td>
+<td>基于庞大的生语料获取良好的文本表示；再由目标任务数据集获得下游任务知识。</td>
+<td>基于庞大的生语料获取良好的文本表示；通过提示（模板）构造输入以增强任务迁移与生成能力，并与下游任务无缝衔接。</td>
+</tr>
+</tbody></table>
+<h2 id="3、Prompt工程"><a href="#3、Prompt工程" class="headerlink" title="3、Prompt工程"></a>3、Prompt工程</h2><p>高级Prompti提示</p>
+<ul>
+<li>零样本提示（Zero-shot Prompting）</li>
+<li>少样本提示（Few-shot Prompting）</li>
+<li>思维链CoT提示（Chain-of-Thought Prompting）</li>
+<li>零样本CoT（Zero-shot CoT）</li>
+<li>自一致性（Self-Consistency）</li>
+<li>生成知识提示（Generate Knowledge Prompting）</li>
+<li>自动提示工程（Automatic Prompt Engineer）</li>
+</ul>
+<h2 id="4、大模型的内核：Transformer"><a href="#4、大模型的内核：Transformer" class="headerlink" title="4、大模型的内核：Transformer"></a>4、大模型的内核：Transformer</h2><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>结构</th>
+<th>位置编码</th>
+<th>激活函数</th>
+<th>layer norm 方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原生 Transformer</td>
+<td>Encoder-Decoder</td>
+<td>Sinusoidal 编码</td>
+<td>ReLU</td>
+<td>Post layer norm</td>
+</tr>
+<tr>
+<td>BERT</td>
+<td>Encoder</td>
+<td>绝对位置编码</td>
+<td>GeLU</td>
+<td>Post layer norm</td>
+</tr>
+<tr>
+<td>LLaMA</td>
+<td>Casual decoder</td>
+<td>RoPE</td>
+<td>SwiGLU</td>
+<td>Pre RMS Norm</td>
+</tr>
+<tr>
+<td>ChatGLM-6B</td>
+<td>Prefix decoder</td>
+<td>RoPE</td>
+<td>GeGLU</td>
+<td>Post Deep Norm</td>
+</tr>
+<tr>
+<td>Bloom</td>
+<td>Casual decoder</td>
+<td>ALiBi</td>
+<td>GeLU</td>
+<td>Pre Layer Norm</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-大模型的架构"><a href="#4-1-大模型的架构" class="headerlink" title="4.1 大模型的架构"></a>4.1 大模型的架构</h3><p><img src="C:\Users\LinYFeng\Desktop\hexo-blog\source_posts\assets\image-20251111235817641.png" srcset="/img/loading.gif" lazyload alt="image-20251111235817641"></p>
+<ul>
+<li><p>Encoder-Decoder（BART、T5）：Encoder阶段前后都能看到，Decoder只能向前看</p>
+</li>
+<li><p>Decoder（GPT、LLAMa）</p>
+</li>
+<li><p>Prefix LM（GLM模型）</p>
+</li>
+</ul>
+<h3 id="4-2-激活函数"><a href="#4-2-激活函数" class="headerlink" title="4.2 激活函数"></a>4.2 激活函数</h3><p>ReLU太硬了，使用正态分布的概率密度函数来做，然后用函数近似，得到GeLU，然后再衍生出变体。</p>
+<h3 id="4-3-位置编码"><a href="#4-3-位置编码" class="headerlink" title="4.3 位置编码"></a>4.3 位置编码</h3><blockquote>
+<p>在NLP任务中，”我借你钱“和”你借我钱“是意思完全不同的两句话，所以词的位置变化有影响，因此需要做位置编码来保持对词位置的敏感</p>
+<ul>
+<li>但其实有的时候其实对绝对位置不敏感，对相对位置比较敏感（比如考上大学，其实不是考了多少分，而是在省内的排名，省内排名就是相对位置，有多少人分数比你高，有多少人分数比你低）</li>
+<li>因此在这里更关心的是这个词离我有多远，远到什么程度，而相隔越远的词相似度可能越低</li>
+</ul>
+</blockquote>
+<h2 id="需要复习一下大模型的结构"><a href="#需要复习一下大模型的结构" class="headerlink" title="需要复习一下大模型的结构"></a>需要复习一下大模型的结构</h2>
                 
               </div>
             
@@ -307,11 +454,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E8%AF%BE%E5%AD%A6%E4%B9%A0/" class="category-chain-item">网课学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%9A%8F%E7%AC%94/" class="print-no-link">#随笔</a>
+        <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="print-no-link">#大模型</a>
       
     </div>
   
@@ -323,8 +491,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>追风的第一篇博客</div>
-      <div>http://example.com/2025/11/10/追风的第一篇博客/</div>
+      <div>LLM-1.大模型综述</div>
+      <div>http://example.com/2025/11/11/LLM-1-大模型综述/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +504,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年11月10日</div>
+          <div>2025年11月11日</div>
         </div>
       
       
@@ -368,18 +536,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/11/LLM-1-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%BC%E8%BF%B0/" title="LLM-1.大模型综述">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LLM-1.大模型综述</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/10/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2025/11/10/%E8%BF%BD%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="追风的第一篇博客">
+                        <span class="hidden-mobile">追风的第一篇博客</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
