@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>自监督学习</title>
+    <link href="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="自监督学习（self-supervised-Learning）"><a href="#自监督学习（self-supervised-Learning）" class="headerlink" title="自监督学习（self-supervised Learning）"></a>自监督学习（self-supervised Learning）</h2><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-1.png" class="" title="自监督学习"><ul><li>定义：Predict parts of input data from other parts, using the data’s inherent structure instead of explicit labels</li><li>分类：<ul><li>基于前置任务</li><li>基于对比学习</li><li>基于掩码重建</li></ul></li></ul><h3 id="1-基于前置任务"><a href="#1-基于前置任务" class="headerlink" title="1. 基于前置任务"></a>1. 基于前置任务</h3><blockquote><p>设计一个任务（比如说位置预测和拼图），让网络去学习图像中本身就存在的位置关系，这样标签label就可以从原始数据本身当中创造。</p></blockquote><ul><li>a.位置预测<ul><li>Relative positioning：把图分成不同的patch，用两个相同的CNN，分别输入中心patch和1~9的其中一个patch，让网络去预测这个patch是在中心patch的哪个方位上或者说是预测这个patch是几号。</li><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-2.png" class="" title="自监督学习"></li><li>Solving the jigsaw：把原始图像分patch，然后打乱patch的顺序，让CFN网络去预测正确的顺序</li><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-3.png" class="" title="自监督学习"></li></ul></li><li>b.旋转预测<ul><li>将图像旋转，让模型去预测旋转角度，这样模型就能学习到一些比如说鼻子嘴巴眼睛的特征？</li><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-4.png" class="" title="自监督学习"></li></ul></li><li>c.上色（Colorization）<ul><li>要求网络对一张灰度图的每个像素去上色还原成原始RGB图像。因为是像素级的操作，因此细腻度更高，适合分割任务</li><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-5.png" class="" title="自监督学习"></li></ul></li><li>d.聚类预测<ul><li>使用聚类算法生成假标签，然后用假标签去训练网络反向传播，然后再根据更新后的CNN输出再去做聚类，再用生成的假标签去训练，如此反复</li><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-6.png" class="" title="自监督学习"></li></ul></li></ul><h3 id="2-基于对比学习"><a href="#2-基于对比学习" class="headerlink" title="2. 基于对比学习"></a>2. 基于对比学习</h3><blockquote><p>将一张图像通过数据增强后，通过约束Loss，让正样本间的距离尽可能近，负样本间的距离尽可能远</p></blockquote><p>$\begin{aligned} \mathcal{L}<em>{\mathrm{infoNCE}} &amp; &#x3D;-\log\frac{\exp(\sin(z_i,z^+)&#x2F;\tau)}{\exp(\sin(z_i,z^+)&#x2F;\tau)+\sum</em>{j&#x3D;1}^k\exp\left(\sin\left(z_i,z_j^-\right)&#x2F;\tau\right)}&#x3D;-\log\frac{\exp(\sin(z_i,z^+)&#x2F;\tau)}{\sum_{j&#x3D;1}^k\exp(\sin(z_i,z_j)&#x2F;\tau)} \ &amp; sim\left(z_i,z_j\right)&#x3D;\frac{z_i.z_j}{\parallel z_i\parallel.\parallel z_j\parallel} \end{aligned}$</p><ul><li>a.SimCLR<ul><li><img src="/2025/11/13/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/images-7.png" class="" title="自监督学习"></li><li>这里在下游任务中，使用的是没经过MLP的原始特征，因为MLP的作用就是让$h_i$和$h_j$更加接近，从而更好的去训练，但是明显经过增强后的两种图像应该是有比较明显的差异的，因此$h_i$和$h_j$会蕴含更多的特征信息</li><li>随机裁剪和颜色抖动能取得较好效果</li><li>较大的batch-size也可以获得比较好的效果</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>网课学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MLLMs</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>LLM-1.大模型综述</title>
     <link href="/2025/11/11/LLM-1-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%BC%E8%BF%B0/"/>
     <url>/2025/11/11/LLM-1-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%BC%E8%BF%B0/</url>
