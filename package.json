@@ -1,0 +1,41 @@
+{
+  "name": "orbitale",
+  "type": "module",
+  "version": "0.2.1",
+  "description": "A Chinese-first Astro theme for personal digital gardens.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinYeeGiong/orbitale.git"
+  },
+  "homepage": "https://github.com/LinYeeGiong/orbitale#readme",
+  "keywords": [
+    "astro",
+    "astro-theme",
+    "blog",
+    "digital-garden",
+    "chinese"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "astro sync && vitest",
+    "verify": "npm test -- --run && npm run check && npm run build",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^7.2.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.2.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

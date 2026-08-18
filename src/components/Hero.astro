@@ -1,0 +1,27 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section class="hero-copy" aria-labelledby="home-title">
+  <div>
+    <p class="hero-overline">{siteConfig.hero.overline}</p>
+    <h1 id="home-title">{siteConfig.hero.headlineTop}<br />{siteConfig.hero.headlineBeforeAccent}<span>{siteConfig.hero.headlineAccent}</span></h1>
+  </div>
+  <div class="hero-intro">
+    <p>{siteConfig.hero.intro}</p>
+    <a href={siteConfig.hero.ctaHref}>{siteConfig.hero.cta} <span aria-hidden="true">→</span></a>
+  </div>
+  <slot />
+</section>
+
+<style>
+  .hero-copy { min-width: 0; min-height: 670px; display: flex; flex-direction: column; justify-content: space-between; padding: 70px 52px 38px 0; border-right: 1px solid var(--line); }
+  .hero-overline { margin: 0; color: var(--cyan); font: 400 11px 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  h1 { margin: 34px 0 0; font: 600 clamp(58px, 8vw, 102px)/.9 'Noto Serif SC', serif; letter-spacing: 0; }
+  h1 span { color: var(--coral); }
+  .hero-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; }
+  .hero-intro p { max-width: 510px; margin: 36px 0 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+  .hero-intro a { flex: 0 0 auto; display: inline-flex; gap: 9px; align-items: center; padding: 12px 15px; border-radius: 4px; background: var(--ink); color: var(--bg); font-size: 12px; }
+  @media (max-width: 820px) { .hero-copy { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 52px 0 32px; gap: 44px; } h1 { font-size: 68px; } }
+  @media (max-width: 520px) { h1 { font-size: 51px; } .hero-intro { align-items: flex-start; flex-direction: column; } }
+</style>

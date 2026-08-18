@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+
+import CommandTerminal from '../components/CommandTerminal.astro';
+import ContentOverview from '../components/ContentOverview.astro';
+import ExplorationOrbit from '../components/ExplorationOrbit.astro';
+import Hero from '../components/Hero.astro';
+import { siteConfig } from '../config/site';
+import SiteShell from '../layouts/SiteShell.astro';
+import { buildActivityDays, type Publication } from '../lib/activity';
+import { buildExplorationStats, type ContentRecord } from '../lib/content';
+
+const [notes, essays, daily] = await Promise.all([
+  getCollection('notes', ({ data }) => data.published && data.lang === 'zh'),
+  getCollection('essays', ({ data }) => data.published && data.lang === 'zh'),
+  getCollection('daily', ({ data }) => data.published && data.lang === 'zh'),
+]);
+
+const tagCounts = new Map<string, number>();
+for (const entry of [...notes, ...essays, ...daily]) {
+  for (const tag of entry.data.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+}
+const tags = [...tagCounts.entries()]
+  .map(([name, count]) => ({ name, count }))
+  .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name, 'zh-CN'));
+
+const publications: Publication[] = [
+  ...notes.map(({ data }) => ({ date: data.date, kind: 'notes' as const })),
+  ...essays.map(({ data }) => ({ date: data.date, kind: 'essays' as const })),
+  ...daily.map(({ data }) => ({ date: data.date, kind: 'daily' as const })),
+];
+const contentRecords: ContentRecord[] = [
+  ...notes.map(({ id, data }) => ({ id, kind: 'notes' as const, title: data.title, description: data.description, date: data.date, tags: data.tags })),
+  ...essays.map(({ id, data }) => ({ id, kind: 'essays' as const, title: data.title, description: data.description, date: data.date, tags: data.tags })),
+  ...daily.map(({ id, data }) => ({ id, kind: 'daily' as const, title: data.title, description: data.description, date: data.date, tags: data.tags })),
+];
+const explorationFields = buildExplorationStats(siteConfig.exploration, contentRecords);
+const latestPublicationDate = publications.reduce<Date | undefined>(
+  (latest, publication) => !latest || publication.date > latest ? publication.date : latest,
+  undefined,
+);
+const activityEndDate = latestPublicationDate ?? new Date();
+const activity = buildActivityDays(publications, activityEndDate, 24 * 7);
+const writingDays = new Set(publications.map(({ date }) => date.toISOString().slice(0, 10))).size;
+const updatedAt = activityEndDate.toISOString().slice(0, 10).replaceAll('-', '.');
+---
+
+<SiteShell>
+  <main class="page-main" id="top">
+    <div class="home-grid">
+      <Hero>
+        <CommandTerminal
+          explorationCount={explorationFields[0]?.count ?? 0}
+          explorationLabel={explorationFields[0]?.label}
+        />
+      </Hero>
+      <ExplorationOrbit identity={siteConfig.shortName} fields={explorationFields} />
+    </div>
+    <ContentOverview
+      notes={notes.length}
+      essays={essays.length}
+      daily={daily.length}
+      tags={tags}
+      activity={activity}
+      writingDays={writingDays}
+      updatedAt={updatedAt}
+    />
+  </main>
+</SiteShell>
+
+<style>
+  .home-grid { min-height: 670px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); }
+  @media (max-width: 820px) { .home-grid { grid-template-columns: 1fr; } }
+</style>
