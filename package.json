@@ -30,7 +30,13 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "astro": "^7.2.2"
+    "astro": "^7.2.2",
+    "gray-matter": "^4.0.3",
+    "pinyin-pro": "^3.29.3",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
