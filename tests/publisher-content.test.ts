@@ -94,6 +94,21 @@ describe('inspectSource', () => {
     expect(plan.metadata).toMatchObject({ title: 'Agent Memory', published: true, slug: 'agent-memory' });
   });
 
+  it('treats an empty template publicationId as unpublished', async () => {
+    const { vaultRoot, blogRoot } = await makeWorkspace();
+    const sourcePath = path.join(vaultRoot, '10_Notes', 'Agent Memory.md');
+    await writeFile(sourcePath, noteFrontmatter('slug: ""\npublicationId: ""\n'), 'utf8');
+
+    const plan = await inspectSource({
+      sourcePath,
+      vaultRoot,
+      blogRoot,
+      randomUUID: () => '4b99af42-da18-45a2-aefa-0d669e48658f',
+    });
+
+    expect(plan.publicationId).toBe('4b99af42-da18-45a2-aefa-0d669e48658f');
+  });
+
   it.each([
     ['title', 'title:'],
     ['description', 'description:'],

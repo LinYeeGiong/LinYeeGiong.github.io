@@ -170,7 +170,7 @@ export async function inspectSource({
     fileStem: path.basename(sourcePath, path.extname(sourcePath)),
     date: validated.date,
   });
-  const publicationId = validated.publicationId ?? randomUUID();
+  const publicationId = validated.publicationId || randomUUID();
   const metadata = {
     ...validated,
     slug,
