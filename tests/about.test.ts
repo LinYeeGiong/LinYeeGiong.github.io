@@ -22,6 +22,11 @@ describe('personal About page', () => {
     expect(html).toContain('alt="LinYeeGiong 的头像"');
   });
 
+  it('uses the profile image for browser and Apple device icons', () => {
+    expect(html).toContain('rel="icon" type="image/jpeg" href="/images/profile/lin-avatar.jpg?v=1"');
+    expect(html).toContain('rel="apple-touch-icon" href="/images/profile/lin-avatar.jpg?v=1"');
+  });
+
   it('renders all approved research areas as structured focus items', () => {
     expect(html.match(/data-focus-item/g)).toHaveLength(3);
     expect(html).toContain('AGENT SYSTEMS');
