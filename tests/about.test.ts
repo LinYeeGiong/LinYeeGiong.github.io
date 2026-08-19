@@ -29,9 +29,28 @@ describe('personal About page', () => {
     expect(html).toContain('COMPUTER VISION');
   });
 
+  it('renders the configured About sections and complete working stack', () => {
+    expect(html).toContain('正在探索的方向');
+    expect(html).toContain('常用技术栈');
+    expect(html).toContain('我的工作方式');
+    expect(html).toContain('当前阶段');
+    expect(html).toContain('技术之外');
+    expect(html).toContain('Astro');
+    expect(html).toContain('GitHub Actions');
+    expect(html).toContain('Obsidian');
+  });
+
   it('publishes public links without exposing an empty email link', () => {
-    expect(html).toContain('href="https://github.com/LinYeeGiong"');
-    expect(html).toContain('href="/rss.xml"');
-    expect(html).not.toContain('href="mailto:');
+    const contact = html.match(/<div class="contact-band" data-about-contact[^>]*>([\s\S]*?)<\/div>/)?.[1];
+
+    expect(contact).toBeDefined();
+    expect(contact).toContain('href="https://github.com/LinYeeGiong"');
+    expect(contact).toContain('href="/rss.xml"');
+    expect(contact).not.toContain('href="mailto:');
+  });
+
+  it('does not claim a live online state or focus static research cards', () => {
+    expect(html).not.toContain('ONLINE');
+    expect(html).not.toContain('data-focus-item tabindex="0"');
   });
 });

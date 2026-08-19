@@ -21,10 +21,15 @@ export const siteConfig = {
     ctaHref: '/about/',
   },
   about: {
+    metaTitle: '关于 LinYeeGiong',
     eyebrow: '01 / ABOUT',
     title: 'LinYeeGiong',
     description: '厦门大学研究生 LinYeeGiong 的个人档案，关注 Agents、MLLMs、Computer Vision 与 AI 工程。',
     avatar: '/images/profile/lin-avatar.jpg',
+    avatarAlt: 'LinYeeGiong 的头像',
+    monogram: 'LYG',
+    portraitLabel: 'PROFILE / 001',
+    portraitStatus: 'ACTIVE PROFILE',
     status: 'LEARNING & BUILDING',
     identity: '厦门大学研究生在读',
     statement: '在模型、系统与人之间，探索更可靠的智能协作方式。',
@@ -63,6 +68,21 @@ export const siteConfig = {
       { label: 'INFRA', items: ['Docker', 'GitHub Actions'] },
       { label: 'KNOWLEDGE', items: ['Obsidian'] },
     ],
+    sections: {
+      focus: {
+        eyebrow: '02 / CURRENT FOCUS',
+        title: '正在探索的方向',
+        description: '研究不只是一个主题列表，而是一组持续变化、彼此连接的问题。',
+      },
+      stack: {
+        eyebrow: '03 / WORKING STACK',
+        title: '常用技术栈',
+        description: '技术栈会随问题变化。重要的是选择合适的工具，把想法做成可靠、可复现的系统。',
+      },
+      principles: { eyebrow: '04 / PRINCIPLES', title: '我的工作方式' },
+      timeline: { eyebrow: '05 / TIMELINE', title: '当前阶段' },
+      beyond: { eyebrow: '06 / BEYOND CODE', title: '技术之外' },
+    },
     principles: [
       { label: 'BUILD TO UNDERSTAND', title: '用构建验证理解', description: '真正运行起来的系统，往往比停留在纸面上的想法暴露更多问题。' },
       { label: 'WRITE TO CLARIFY', title: '用写作澄清判断', description: '写作不是对结果的包装，而是梳理假设、压缩信息和修正判断的过程。' },
@@ -76,6 +96,8 @@ export const siteConfig = {
     ],
     beyond: '除了研究和工程，这里也会记录阅读、写作、影像和日常生活。技术构成了我观察世界的一部分，但不是全部。',
     contactPrompt: '正在研究 Agents、MLLMs 或 Computer Vision？欢迎通过 GitHub 与我交流。',
+    contactAriaLabel: '联系 LinYeeGiong',
+    contactLabels: { github: 'GITHUB', rss: 'RSS', email: 'EMAIL' },
   },
   navigation: [
     { label: '首页', href: '/' },

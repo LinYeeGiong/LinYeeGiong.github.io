@@ -5,18 +5,18 @@ import { siteConfig } from '../config/site';
 const { about } = siteConfig;
 ---
 
-<SiteShell title={`关于 ${about.title}`} description={about.description}>
+<SiteShell title={about.metaTitle} description={about.description}>
   <main class="about-page" id="top" data-about-profile>
     <section class="profile-hero" aria-labelledby="profile-title">
       <div class="profile-media">
         <figure>
           <div class="portrait-frame">
-            <img src={about.avatar} alt={`${about.title} 的头像`} width="1080" height="1080" />
-            <span class="portrait-corner" aria-hidden="true">LYG</span>
+            <img src={about.avatar} alt={about.avatarAlt} width="1080" height="1080" />
+            <span class="portrait-corner" aria-hidden="true">{about.monogram}</span>
           </div>
           <figcaption>
-            <span>PROFILE / 001</span>
-            <span class="profile-state"><i aria-hidden="true"></i> ONLINE</span>
+            <span>{about.portraitLabel}</span>
+            <span class="profile-state"><i aria-hidden="true"></i> {about.portraitStatus}</span>
           </figcaption>
         </figure>
       </div>
@@ -45,15 +45,15 @@ const { about } = siteConfig;
 
     <section class="about-section focus-section" aria-labelledby="focus-title">
       <header class="section-heading">
-        <span>02 / CURRENT FOCUS</span>
+        <span>{about.sections.focus.eyebrow}</span>
         <div>
-          <h2 id="focus-title">正在探索的方向</h2>
-          <p>研究不只是一个主题列表，而是一组持续变化、彼此连接的问题。</p>
+          <h2 id="focus-title">{about.sections.focus.title}</h2>
+          <p>{about.sections.focus.description}</p>
         </div>
       </header>
       <div class="focus-list">
         {about.focuses.map((focus, index) => (
-          <article class={`focus-item focus-item-${index + 1}`} data-focus-item tabindex="0">
+          <article class={`focus-item focus-item-${index + 1}`} data-focus-item>
             <span class="focus-number">0{index + 1}</span>
             <div class="focus-name">
               <small>{focus.label}</small>
@@ -68,10 +68,10 @@ const { about } = siteConfig;
 
     <section class="about-section stack-section" aria-labelledby="stack-title">
       <header class="section-heading">
-        <span>03 / WORKING STACK</span>
+        <span>{about.sections.stack.eyebrow}</span>
         <div>
-          <h2 id="stack-title">常用技术栈</h2>
-          <p>技术栈会随问题变化。重要的是选择合适的工具，把想法做成可靠、可复现的系统。</p>
+          <h2 id="stack-title">{about.sections.stack.title}</h2>
+          <p>{about.sections.stack.description}</p>
         </div>
       </header>
       <dl class="stack-grid">
@@ -86,8 +86,8 @@ const { about } = siteConfig;
 
     <section class="about-section principles-section" aria-labelledby="principles-title">
       <header class="section-heading">
-        <span>04 / PRINCIPLES</span>
-        <div><h2 id="principles-title">我的工作方式</h2></div>
+        <span>{about.sections.principles.eyebrow}</span>
+        <div><h2 id="principles-title">{about.sections.principles.title}</h2></div>
       </header>
       <div class="principles-grid">
         {about.principles.map((principle, index) => (
@@ -103,8 +103,8 @@ const { about } = siteConfig;
 
     <section class="about-section timeline-section" aria-labelledby="timeline-title">
       <header class="section-heading">
-        <span>05 / TIMELINE</span>
-        <div><h2 id="timeline-title">当前阶段</h2></div>
+        <span>{about.sections.timeline.eyebrow}</span>
+        <div><h2 id="timeline-title">{about.sections.timeline.title}</h2></div>
       </header>
       <ol class="timeline-list">
         {about.timeline.map((item, index) => (
@@ -120,18 +120,18 @@ const { about } = siteConfig;
 
     <section class="about-section beyond-section" aria-labelledby="beyond-title">
       <header class="section-heading">
-        <span>06 / BEYOND CODE</span>
+        <span>{about.sections.beyond.eyebrow}</span>
         <div>
-          <h2 id="beyond-title">技术之外</h2>
+          <h2 id="beyond-title">{about.sections.beyond.title}</h2>
           <p>{about.beyond}</p>
         </div>
       </header>
-      <div class="contact-band">
+      <div class="contact-band" data-about-contact>
         <p>{about.contactPrompt}</p>
-        <nav aria-label="联系 LinYeeGiong">
-          <a href={siteConfig.github} target="_blank" rel="me noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
-          <a href="/rss.xml">RSS <span aria-hidden="true">↗</span></a>
-          {siteConfig.email && <a href={`mailto:${siteConfig.email}`}>EMAIL <span aria-hidden="true">↗</span></a>}
+        <nav aria-label={about.contactAriaLabel}>
+          <a href={siteConfig.github} target="_blank" rel="me noreferrer">{about.contactLabels.github} <span aria-hidden="true">↗</span></a>
+          <a href="/rss.xml">{about.contactLabels.rss} <span aria-hidden="true">↗</span></a>
+          {siteConfig.email && <a href={`mailto:${siteConfig.email}`}>{about.contactLabels.email} <span aria-hidden="true">↗</span></a>}
         </nav>
       </div>
     </section>
@@ -180,14 +180,14 @@ const { about } = siteConfig;
   .focus-item-2 { --focus-accent: var(--yellow); }
   .focus-item-3 { --focus-accent: var(--green); }
   .focus-item::before { content: ''; position: absolute; top: 0; bottom: 0; left: -24px; width: 3px; background: var(--focus-accent); transform: scaleY(0); transform-origin: center; transition: transform 220ms ease; }
-  .focus-item:hover, .focus-item:focus-visible { padding-left: 14px; background: color-mix(in srgb, var(--soft) 62%, transparent); outline: 0; }
-  .focus-item:hover::before, .focus-item:focus-visible::before { transform: scaleY(1); }
+  .focus-item:hover { padding-left: 14px; background: color-mix(in srgb, var(--soft) 62%, transparent); }
+  .focus-item:hover::before { transform: scaleY(1); }
   .focus-number { color: var(--focus-accent); font: 400 11px 'DM Mono', monospace; }
   .focus-name small, .principles-grid small, .timeline-list small { color: var(--muted); font: 400 9px 'DM Mono', monospace; }
   .focus-name h3, .principles-grid h3, .timeline-list h3 { margin: 8px 0 0; font: 500 19px/1.4 'Noto Serif SC', serif; }
   .focus-item > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
   .focus-mark { color: var(--focus-accent); font-size: 18px; transition: transform 220ms ease; }
-  .focus-item:hover .focus-mark, .focus-item:focus-visible .focus-mark { transform: translate(3px, -3px); }
+  .focus-item:hover .focus-mark { transform: translate(3px, -3px); }
 
   .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
   .stack-grid > div { min-height: 150px; padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -221,7 +221,7 @@ const { about } = siteConfig;
   .contact-band a { display: inline-flex; align-items: center; justify-content: space-between; gap: 30px; min-width: 132px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 4px; font: 400 10px 'DM Mono', monospace; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
   .contact-band a:hover, .contact-band a:focus-visible { border-color: var(--coral); color: var(--coral); background: color-mix(in srgb, var(--coral) 6%, transparent); }
 
-  @media (max-width: 940px) {
+  @media (max-width: 1060px) {
     .profile-hero { grid-template-columns: minmax(230px, .62fr) minmax(0, 1.38fr); }
     .profile-media { padding-right: 32px; }
     .profile-copy { padding-left: 38px; }
