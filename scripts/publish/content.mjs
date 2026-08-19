@@ -51,6 +51,9 @@ function normalizeDate(value) {
   throw new PublishError('INVALID_FRONTMATTER', 'date 必须是有效的 YYYY-MM-DD 日期。', { field: 'date' });
 }
 
+/**
+ * @param {{ kind: string, slug?: string, fileStem?: string, date?: string | Date }} options
+ */
 export function resolveSlug({ kind, slug = '', fileStem = '', date }) {
   if (kind === 'daily') {
     return normalizeDate(date);

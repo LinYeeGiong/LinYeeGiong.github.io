@@ -10,7 +10,7 @@ const sharedSchema = z.object({
   lang: z.enum(['zh', 'en']).default('zh'),
   published: z.boolean().default(false),
   slug: z.string().optional(),
-  publicationId: z.string().uuid().optional(),
+  publicationId: z.uuid().optional(),
   translationKey: z.string().optional(),
   cover: z.string().optional(),
 });

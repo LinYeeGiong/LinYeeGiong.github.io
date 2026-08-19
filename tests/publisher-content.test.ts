@@ -66,7 +66,7 @@ describe('resolveSlug', () => {
 
   it('rejects a slug outside the permanent URL alphabet', () => {
     expect(() => resolveSlug({ kind: 'notes', slug: 'Agent_Memory!', fileStem: 'unused' }))
-      .toThrowError(expect.objectContaining({ code: 'INVALID_SLUG' }));
+      .toThrow(expect.objectContaining({ code: 'INVALID_SLUG' }));
   });
 });
 
