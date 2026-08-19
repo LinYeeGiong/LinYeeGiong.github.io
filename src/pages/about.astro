@@ -1,35 +1,279 @@
 ---
 import SiteShell from '../layouts/SiteShell.astro';
 import { siteConfig } from '../config/site';
+
+const { about } = siteConfig;
 ---
 
-<SiteShell title="关于我" description={`关于 ${siteConfig.name} 的研究、工程、写作与个人记录。`}>
-  <main class="page-main">
-    <header class="page-heading"><span>01 / ABOUT</span><h1>关于我</h1></header>
-    <section class="about-layout">
-      <nav aria-label="个人时间线"><a href="#now" aria-current="true">NOW</a><a href="#2025">2025</a><a href="#2024">2024</a><a href="#2023">2023</a></nav>
-      <article id="now">
-        <span>NOW · STILL LEARNING</span>
-        <h2>把研究、工程和写作连接起来</h2>
-        <p>我希望这个网站能诚实地保留过程：哪些问题已经解决，哪些想法仍在变化，以及每一次失败最终教会了我什么。</p>
-        <dl><div><dt>FOCUS</dt><dd>AI Agents</dd></div><div><dt>TOOL</dt><dd>Obsidian</dd></div><div><dt>STATUS</dt><dd>Building</dd></div></dl>
-      </article>
+<SiteShell title={`关于 ${about.title}`} description={about.description}>
+  <main class="about-page" id="top" data-about-profile>
+    <section class="profile-hero" aria-labelledby="profile-title">
+      <div class="profile-media">
+        <figure>
+          <div class="portrait-frame">
+            <img src={about.avatar} alt={`${about.title} 的头像`} width="1080" height="1080" />
+            <span class="portrait-corner" aria-hidden="true">LYG</span>
+          </div>
+          <figcaption>
+            <span>PROFILE / 001</span>
+            <span class="profile-state"><i aria-hidden="true"></i> ONLINE</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="profile-copy">
+        <div class="profile-kicker">
+          <span>{about.eyebrow}</span>
+          <span>{about.status}</span>
+        </div>
+        <h1 id="profile-title">{about.title}</h1>
+        <p class="identity">{about.identity}</p>
+        <p class="statement">{about.statement}</p>
+        <div class="intro-copy">
+          {about.intro.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <dl class="profile-facts">
+          {about.facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="about-section focus-section" aria-labelledby="focus-title">
+      <header class="section-heading">
+        <span>02 / CURRENT FOCUS</span>
+        <div>
+          <h2 id="focus-title">正在探索的方向</h2>
+          <p>研究不只是一个主题列表，而是一组持续变化、彼此连接的问题。</p>
+        </div>
+      </header>
+      <div class="focus-list">
+        {about.focuses.map((focus, index) => (
+          <article class={`focus-item focus-item-${index + 1}`} data-focus-item tabindex="0">
+            <span class="focus-number">0{index + 1}</span>
+            <div class="focus-name">
+              <small>{focus.label}</small>
+              <h3>{focus.title}</h3>
+            </div>
+            <p>{focus.description}</p>
+            <span class="focus-mark" aria-hidden="true">↗</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="about-section stack-section" aria-labelledby="stack-title">
+      <header class="section-heading">
+        <span>03 / WORKING STACK</span>
+        <div>
+          <h2 id="stack-title">常用技术栈</h2>
+          <p>技术栈会随问题变化。重要的是选择合适的工具，把想法做成可靠、可复现的系统。</p>
+        </div>
+      </header>
+      <dl class="stack-grid">
+        {about.stack.map((group) => (
+          <div>
+            <dt>{group.label}</dt>
+            <dd>{group.items.map((item) => <span>{item}</span>)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="about-section principles-section" aria-labelledby="principles-title">
+      <header class="section-heading">
+        <span>04 / PRINCIPLES</span>
+        <div><h2 id="principles-title">我的工作方式</h2></div>
+      </header>
+      <div class="principles-grid">
+        {about.principles.map((principle, index) => (
+          <article>
+            <span>0{index + 1}</span>
+            <small>{principle.label}</small>
+            <h3>{principle.title}</h3>
+            <p>{principle.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="about-section timeline-section" aria-labelledby="timeline-title">
+      <header class="section-heading">
+        <span>05 / TIMELINE</span>
+        <div><h2 id="timeline-title">当前阶段</h2></div>
+      </header>
+      <ol class="timeline-list">
+        {about.timeline.map((item, index) => (
+          <li>
+            <span class="timeline-node" aria-hidden="true">{index + 1}</span>
+            <small>{item.label}</small>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="about-section beyond-section" aria-labelledby="beyond-title">
+      <header class="section-heading">
+        <span>06 / BEYOND CODE</span>
+        <div>
+          <h2 id="beyond-title">技术之外</h2>
+          <p>{about.beyond}</p>
+        </div>
+      </header>
+      <div class="contact-band">
+        <p>{about.contactPrompt}</p>
+        <nav aria-label="联系 LinYeeGiong">
+          <a href={siteConfig.github} target="_blank" rel="me noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
+          <a href="/rss.xml">RSS <span aria-hidden="true">↗</span></a>
+          {siteConfig.email && <a href={`mailto:${siteConfig.email}`}>EMAIL <span aria-hidden="true">↗</span></a>}
+        </nav>
+      </div>
     </section>
   </main>
 </SiteShell>
 
 <style>
-  .about-layout { min-height: 480px; display: grid; grid-template-columns: .58fr 1.42fr; }
-  nav { padding: 36px 28px 0 0; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 6px; }
-  nav a { padding: 10px 12px; color: var(--muted); font: 400 12px 'DM Mono', monospace; }
-  nav a[aria-current='true'] { color: var(--ink); background: var(--soft); }
-  article { padding: 42px 0 40px 42px; }
-  article > span { color: var(--cyan); font: 400 11px 'DM Mono', monospace; letter-spacing: .1em; }
-  h2 { max-width: 620px; margin: 18px 0; font: 500 30px/1.25 'Noto Serif SC', serif; }
-  p { max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-  dl { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); margin: 34px 0 0; }
-  dl div { padding: 19px; border-right: 1px solid var(--line); } dl div:last-child { border-right: 0; }
-  dt { margin-bottom: 8px; color: var(--muted); font: 400 10px 'DM Mono', monospace; } dd { margin: 0; font-size: 13px; }
-  @media (max-width: 700px) { .about-layout { grid-template-columns: 1fr; } nav { border-right: 0; border-bottom: 1px solid var(--line); display: flex; padding: 18px 0; overflow-x: auto; } article { padding: 32px 0 40px; } }
-  @media (max-width: 520px) { dl { grid-template-columns: 1fr; } dl div { border-right: 0; border-bottom: 1px solid var(--line); } }
+  .about-page { position: relative; z-index: 1; }
+  .profile-hero { min-height: 690px; display: grid; grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr); border-bottom: 1px solid var(--line); }
+  .profile-media { display: flex; align-items: center; padding: 64px 48px 64px 0; border-right: 1px solid var(--line); }
+  figure { width: 100%; margin: 0; }
+  .portrait-frame { position: relative; overflow: hidden; aspect-ratio: 1; background: #f2f0e9; border: 1px solid var(--line); }
+  .portrait-frame::before, .portrait-frame::after { content: ''; position: absolute; z-index: 1; width: 30px; height: 30px; pointer-events: none; }
+  .portrait-frame::before { top: 12px; left: 12px; border-top: 1px solid #161a16; border-left: 1px solid #161a16; }
+  .portrait-frame::after { right: 12px; bottom: 12px; border-right: 1px solid #161a16; border-bottom: 1px solid #161a16; }
+  .portrait-frame img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 500ms cubic-bezier(.2, .8, .2, 1); }
+  .portrait-frame:hover img { transform: scale(1.025); }
+  .portrait-corner { position: absolute; right: 15px; top: 14px; z-index: 2; color: #161a16; font: 500 10px 'DM Mono', monospace; }
+  figcaption { display: flex; justify-content: space-between; gap: 16px; padding-top: 13px; color: var(--muted); font: 400 10px 'DM Mono', monospace; }
+  .profile-state { color: var(--green); }
+  .profile-state i { display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 14%, transparent); }
+
+  .profile-copy { display: flex; flex-direction: column; justify-content: center; padding: 64px 0 64px 58px; }
+  .profile-kicker { display: flex; justify-content: space-between; gap: 20px; color: var(--coral); font: 400 10px 'DM Mono', monospace; }
+  .profile-kicker span:last-child { color: var(--green); }
+  h1 { margin: 31px 0 10px; font: 600 clamp(50px, 7vw, 84px)/.95 'Noto Serif SC', serif; letter-spacing: 0; overflow-wrap: anywhere; }
+  .identity { margin: 0; color: var(--cyan); font: 400 12px 'DM Mono', monospace; }
+  .statement { max-width: 690px; margin: 34px 0 20px; font: 500 clamp(22px, 3vw, 31px)/1.45 'Noto Serif SC', serif; }
+  .intro-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 760px; }
+  .intro-copy p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+  .profile-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 38px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .profile-facts div { min-width: 0; padding: 16px 15px 16px 0; }
+  .profile-facts dt, .stack-grid dt { margin-bottom: 8px; color: var(--muted); font: 400 9px 'DM Mono', monospace; }
+  .profile-facts dd { margin: 0; font: 500 10px/1.45 'DM Mono', monospace; overflow-wrap: anywhere; }
+
+  .about-section { border-bottom: 1px solid var(--line); }
+  .section-heading { display: grid; grid-template-columns: .72fr 1.28fr; min-height: 220px; border-bottom: 1px solid var(--line); }
+  .section-heading > span { padding: 52px 36px 0 0; border-right: 1px solid var(--line); color: var(--coral); font: 400 10px 'DM Mono', monospace; }
+  .section-heading > div { display: flex; flex-direction: column; justify-content: flex-end; padding: 44px 0 42px 58px; }
+  .section-heading h2 { margin: 0; font: 500 clamp(30px, 4vw, 46px)/1.15 'Noto Serif SC', serif; }
+  .section-heading p { max-width: 620px; margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+
+  .focus-list { padding-left: calc(36% + 9px); }
+  .focus-item { --focus-accent: var(--cyan); position: relative; display: grid; grid-template-columns: 60px minmax(180px, .72fr) minmax(280px, 1.28fr) 32px; gap: 24px; align-items: center; min-height: 158px; padding: 24px 0; border-bottom: 1px solid var(--line); transition: background-color 220ms ease, padding 220ms ease; }
+  .focus-item:last-child { border-bottom: 0; }
+  .focus-item-2 { --focus-accent: var(--yellow); }
+  .focus-item-3 { --focus-accent: var(--green); }
+  .focus-item::before { content: ''; position: absolute; top: 0; bottom: 0; left: -24px; width: 3px; background: var(--focus-accent); transform: scaleY(0); transform-origin: center; transition: transform 220ms ease; }
+  .focus-item:hover, .focus-item:focus-visible { padding-left: 14px; background: color-mix(in srgb, var(--soft) 62%, transparent); outline: 0; }
+  .focus-item:hover::before, .focus-item:focus-visible::before { transform: scaleY(1); }
+  .focus-number { color: var(--focus-accent); font: 400 11px 'DM Mono', monospace; }
+  .focus-name small, .principles-grid small, .timeline-list small { color: var(--muted); font: 400 9px 'DM Mono', monospace; }
+  .focus-name h3, .principles-grid h3, .timeline-list h3 { margin: 8px 0 0; font: 500 19px/1.4 'Noto Serif SC', serif; }
+  .focus-item > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+  .focus-mark { color: var(--focus-accent); font-size: 18px; transition: transform 220ms ease; }
+  .focus-item:hover .focus-mark, .focus-item:focus-visible .focus-mark { transform: translate(3px, -3px); }
+
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
+  .stack-grid > div { min-height: 150px; padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stack-grid > div:nth-child(3n) { border-right: 0; }
+  .stack-grid > div:nth-last-child(-n + 3) { border-bottom: 0; }
+  .stack-grid dd { display: flex; flex-wrap: wrap; gap: 7px; margin: 22px 0 0; }
+  .stack-grid dd span { padding: 7px 9px; border: 1px solid var(--line); border-radius: 3px; font: 400 11px 'DM Mono', monospace; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
+  .stack-grid > div:hover dd span { border-color: color-mix(in srgb, var(--cyan) 55%, var(--line)); color: var(--cyan); background: color-mix(in srgb, var(--cyan) 5%, transparent); }
+
+  .principles-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .principles-grid article { min-height: 240px; padding: 34px 42px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .principles-grid article:nth-child(2n) { border-right: 0; }
+  .principles-grid article:nth-last-child(-n + 2) { border-bottom: 0; }
+  .principles-grid article > span { float: right; color: var(--line); font: 500 38px 'DM Mono', monospace; }
+  .principles-grid h3 { margin-top: 18px; font-size: 21px; }
+  .principles-grid p { max-width: 430px; margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+  .timeline-list { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
+  .timeline-list li { position: relative; min-height: 270px; padding: 50px 34px 38px; border-right: 1px solid var(--line); }
+  .timeline-list li:last-child { border-right: 0; }
+  .timeline-node { display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 34px; border: 1px solid var(--line); border-radius: 50%; color: var(--cyan); font: 400 10px 'DM Mono', monospace; }
+  .timeline-list li::before { content: ''; position: absolute; top: 65px; left: 64px; right: 0; height: 1px; background: var(--line); }
+  .timeline-list li:last-child::before { display: none; }
+  .timeline-list h3 { margin-top: 12px; font-size: 21px; }
+  .timeline-list p { margin: 19px 0 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+  .beyond-section { border-bottom: 0; }
+  .contact-band { display: flex; align-items: center; justify-content: space-between; gap: 40px; min-height: 190px; padding: 42px 0; }
+  .contact-band > p { max-width: 620px; margin: 0; font: 500 clamp(20px, 3vw, 28px)/1.5 'Noto Serif SC', serif; }
+  .contact-band nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+  .contact-band a { display: inline-flex; align-items: center; justify-content: space-between; gap: 30px; min-width: 132px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 4px; font: 400 10px 'DM Mono', monospace; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
+  .contact-band a:hover, .contact-band a:focus-visible { border-color: var(--coral); color: var(--coral); background: color-mix(in srgb, var(--coral) 6%, transparent); }
+
+  @media (max-width: 940px) {
+    .profile-hero { grid-template-columns: minmax(230px, .62fr) minmax(0, 1.38fr); }
+    .profile-media { padding-right: 32px; }
+    .profile-copy { padding-left: 38px; }
+    .profile-facts { grid-template-columns: repeat(2, 1fr); }
+    .section-heading { grid-template-columns: .62fr 1.38fr; }
+    .section-heading > div { padding-left: 38px; }
+    .focus-list { padding-left: 0; }
+    .focus-item { grid-template-columns: 44px minmax(170px, .7fr) minmax(250px, 1.3fr) 24px; }
+  }
+
+  @media (max-width: 720px) {
+    .profile-hero { min-height: auto; grid-template-columns: 1fr; }
+    .profile-media { padding: 40px 0 28px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .profile-media figure { max-width: 430px; }
+    .profile-copy { padding: 42px 0 52px; }
+    .intro-copy { grid-template-columns: 1fr; gap: 13px; }
+    .section-heading { grid-template-columns: 1fr; min-height: auto; }
+    .section-heading > span { padding: 38px 0 0; border-right: 0; }
+    .section-heading > div { padding: 40px 0 34px; }
+    .focus-item { grid-template-columns: 36px 1fr 24px; gap: 16px; padding: 28px 0; }
+    .focus-item > p { grid-column: 2 / -1; }
+    .focus-mark { grid-column: 3; grid-row: 1; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .stack-grid > div:nth-child(3n) { border-right: 1px solid var(--line); }
+    .stack-grid > div:nth-child(2n) { border-right: 0; }
+    .stack-grid > div:nth-last-child(-n + 3) { border-bottom: 1px solid var(--line); }
+    .stack-grid > div:nth-last-child(-n + 2) { border-bottom: 0; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .principles-grid article { border-right: 0; }
+    .principles-grid article:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+    .timeline-list { grid-template-columns: 1fr; }
+    .timeline-list li { min-height: 0; padding: 34px 0 34px 55px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .timeline-list li:last-child { border-bottom: 0; }
+    .timeline-node { position: absolute; left: 0; top: 34px; }
+    .timeline-list li::before { top: 64px; bottom: 0; left: 15px; right: auto; width: 1px; height: auto; }
+    .timeline-list li:last-child::before { display: block; bottom: 34px; }
+    .contact-band { align-items: flex-start; flex-direction: column; }
+    .contact-band nav { justify-content: flex-start; }
+  }
+
+  @media (max-width: 440px) {
+    .profile-kicker { flex-direction: column; gap: 9px; }
+    h1 { font-size: 45px; }
+    .statement { font-size: 21px; }
+    .profile-facts { grid-template-columns: 1fr; }
+    .profile-facts div { border-bottom: 1px solid var(--line); }
+    .profile-facts div:last-child { border-bottom: 0; }
+    .focus-item { grid-template-columns: 30px minmax(0, 1fr) 20px; gap: 10px; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .stack-grid > div, .stack-grid > div:nth-child(3n), .stack-grid > div:nth-child(2n), .stack-grid > div:nth-last-child(-n + 2) { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+    .stack-grid > div:last-child { border-bottom: 0; }
+    .principles-grid article { padding-inline: 0; }
+    .contact-band nav, .contact-band a { width: 100%; }
+  }
 </style>

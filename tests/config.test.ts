@@ -17,4 +17,19 @@ describe('siteConfig', () => {
     expect(siteConfig.terminal.user).toBe('lin');
     expect(siteConfig.location).toContain('SHANGHAI');
   });
+
+  it('centralizes the complete public About profile', () => {
+    expect(siteConfig.about.title).toBe('LinYeeGiong');
+    expect(siteConfig.about.identity).toBe('厦门大学研究生在读');
+    expect(siteConfig.about.avatar).toBe('/images/profile/lin-avatar.jpg');
+    expect(siteConfig.about.focuses.map((focus) => focus.label)).toEqual([
+      'AGENT SYSTEMS',
+      'MLLMS',
+      'COMPUTER VISION',
+    ]);
+    expect(siteConfig.about.stack.flatMap((group) => group.items)).toEqual(
+      expect.arrayContaining(['Python', 'TypeScript', 'FastAPI', 'Pydantic', 'PostgreSQL', 'Next.js', 'Docker']),
+    );
+    expect(siteConfig.email).toBeNull();
+  });
 });

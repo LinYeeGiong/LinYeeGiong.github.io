@@ -20,6 +20,63 @@ export const siteConfig = {
     cta: '进入我的世界',
     ctaHref: '/about/',
   },
+  about: {
+    eyebrow: '01 / ABOUT',
+    title: 'LinYeeGiong',
+    description: '厦门大学研究生 LinYeeGiong 的个人档案，关注 Agents、MLLMs、Computer Vision 与 AI 工程。',
+    avatar: '/images/profile/lin-avatar.jpg',
+    status: 'LEARNING & BUILDING',
+    identity: '厦门大学研究生在读',
+    statement: '在模型、系统与人之间，探索更可靠的智能协作方式。',
+    intro: [
+      '我关注 Agents、MLLMs 与 Computer Vision，喜欢把研究问题落实成可以运行、验证和持续迭代的系统。',
+      '这个网站是我的公开工作笔记：记录研究过程、工程实践、阅读思考，以及技术之外的日常切片。',
+    ],
+    facts: [
+      { label: 'IDENTITY', value: 'GRADUATE STUDENT' },
+      { label: 'AFFILIATION', value: 'XIAMEN UNIVERSITY' },
+      { label: 'FOCUS', value: 'AI SYSTEMS' },
+      { label: 'STATUS', value: 'BUILDING' },
+    ],
+    focuses: [
+      {
+        label: 'AGENT SYSTEMS',
+        title: '智能体与协作',
+        description: '探索智能体的记忆、工具调用、任务规划与多智能体协作，以及人如何与 AI 一起完成长期、复杂的工作。',
+      },
+      {
+        label: 'MLLMS',
+        title: '多模态大语言模型',
+        description: '关注多模态大模型的理解、推理与应用，思考模型如何连接文本、图像和真实环境中的信息。',
+      },
+      {
+        label: 'COMPUTER VISION',
+        title: '计算机视觉',
+        description: '研究视觉信息的表示、理解与生成，以及视觉能力如何成为智能系统感知世界的一部分。',
+      },
+    ],
+    stack: [
+      { label: 'LANGUAGE', items: ['Python', 'TypeScript'] },
+      { label: 'BACKEND', items: ['FastAPI', 'Pydantic'] },
+      { label: 'DATA', items: ['PostgreSQL'] },
+      { label: 'FRONTEND', items: ['Next.js', 'Astro'] },
+      { label: 'INFRA', items: ['Docker', 'GitHub Actions'] },
+      { label: 'KNOWLEDGE', items: ['Obsidian'] },
+    ],
+    principles: [
+      { label: 'BUILD TO UNDERSTAND', title: '用构建验证理解', description: '真正运行起来的系统，往往比停留在纸面上的想法暴露更多问题。' },
+      { label: 'WRITE TO CLARIFY', title: '用写作澄清判断', description: '写作不是对结果的包装，而是梳理假设、压缩信息和修正判断的过程。' },
+      { label: 'SYSTEMS OVER DEMOS', title: '系统胜过一次性演示', description: '相比短暂的展示，我更关心系统能否被维护、复现，并在真实环境中持续工作。' },
+      { label: 'KEEP THE PROCESS', title: '保留尚未完成的过程', description: '不是所有内容都需要成为完整答案，正在变化的观点也值得留下版本记录。' },
+    ],
+    timeline: [
+      { label: 'NOW', title: '学习与研究', description: '在厦门大学攻读研究生，持续学习和研究 Agents、MLLMs、Computer Vision 与相关工程系统。' },
+      { label: 'BUILDING', title: '个人数字花园', description: '连接 Obsidian、自动化工具、GitHub 与 Astro，让知识从私人笔记自然流向公开写作。' },
+      { label: 'NEXT', title: '继续向真实问题靠近', description: '深入智能体系统、多模态模型与视觉理解，同时公开记录研究和工程实践中的真实问题。' },
+    ],
+    beyond: '除了研究和工程，这里也会记录阅读、写作、影像和日常生活。技术构成了我观察世界的一部分，但不是全部。',
+    contactPrompt: '正在研究 Agents、MLLMs 或 Computer Vision？欢迎通过 GitHub 与我交流。',
+  },
   navigation: [
     { label: '首页', href: '/' },
     { label: '关于', href: '/about/' },
