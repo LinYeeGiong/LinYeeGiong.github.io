@@ -122,7 +122,9 @@ export async function executePublication(options) {
 
     const articleRelative = path.relative(blogRoot, plan.destinationPath);
     const imagesRelative = path.relative(blogRoot, imageDirectory);
-    await gitRunner(['add', '-A', '--', articleRelative, imagesRelative], { cwd: blogRoot });
+    const pathsToStage = [articleRelative];
+    if (imagesExisted || transformed.files.length > 0) pathsToStage.push(imagesRelative);
+    await gitRunner(['add', '-A', '--', ...pathsToStage], { cwd: blogRoot });
     const staged = (await gitRunner(['diff', '--cached', '--name-only'], { cwd: blogRoot })).stdout.trim();
     if (!staged) {
       return { ok: true, phase: 'publish', action: 'noop', slug: plan.slug, kind: plan.kind, publicUrl: plan.publicUrl };

@@ -18,7 +18,7 @@ async function git(cwd: string, args: string[]) {
   return result.stdout.trim();
 }
 
-function sourceDocument(overrides = '') {
+function sourceDocument(overrides = '', body = '![diagram](../Attachments/diagram.png)') {
   return `---
 title: Agent Memory
 description: A durable memory note
@@ -28,7 +28,7 @@ lang: zh
 published: false
 ${overrides}---
 
-![diagram](../Attachments/diagram.png)
+${body}
 `;
 }
 
@@ -111,6 +111,25 @@ describe('publication transaction', () => {
       'utf8',
     )).toBe('diagram');
     expect(await git(workspace.blogRoot, ['log', '-1', '--format=%s'])).toBe('content: publish agent-memory');
+    expect(await git(workspace.blogRoot, ['rev-parse', 'HEAD']))
+      .toBe(await git(workspace.remoteRoot, ['rev-parse', 'main']));
+  });
+
+  it('publishes an article with no local images', async () => {
+    const workspace = await makeRepository();
+    await writeFile(workspace.sourcePath, sourceDocument('', 'A text-only note.'), 'utf8');
+
+    const result = await executePublication({
+      ...workspace,
+      expectedRemote: workspace.remoteRoot,
+      randomUUID: () => '4b99af42-da18-45a2-aefa-0d669e48658f',
+    });
+
+    expect(result).toMatchObject({ ok: true, action: 'create', slug: 'agent-memory' });
+    expect(await readFile(
+      path.join(workspace.blogRoot, 'src', 'content', 'notes', 'agent-memory.md'),
+      'utf8',
+    )).toContain('A text-only note.');
     expect(await git(workspace.blogRoot, ['rev-parse', 'HEAD']))
       .toBe(await git(workspace.remoteRoot, ['rev-parse', 'main']));
   });
