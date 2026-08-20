@@ -43,8 +43,7 @@ function parseResult(stdout) {
 }
 
 function defaultNotice(message) {
-  const { Notice } = require('obsidian');
-  new Notice(message, 8000);
+  console.info(`[Orbitale] ${message}`);
 }
 
 module.exports = async function publishCurrentNote(params) {
@@ -79,21 +78,22 @@ module.exports = async function publishCurrentNote(params) {
       return inspection;
     }
 
-    if (inspection.action === 'update') {
-      const confirmed = await quickAddApi.yesNoPrompt(
-        '更新已有文章？',
-        `即将更新 /${inspection.kind}/${inspection.slug}/ 及其图片。`,
-      );
-      if (!confirmed) {
-        const result = { ok: false, code: 'CANCELLED', message: '已取消更新。' };
-        showNotice(result.message);
-        return result;
-      }
+    const isUpdate = inspection.action === 'update';
+    const confirmed = await quickAddApi.yesNoPrompt(
+      isUpdate ? '更新已有文章？' : '发布新文章？',
+      isUpdate
+        ? `即将更新 /${inspection.kind}/${inspection.slug}/ 及其图片。`
+        : `即将发布 /${inspection.kind}/${inspection.slug}/ 及其图片。`,
+    );
+    if (!confirmed) {
+      const result = { ok: false, code: 'CANCELLED', message: isUpdate ? '已取消更新。' : '已取消发布。' };
+      showNotice(result.message);
+      return result;
     }
 
     showNotice('正在验证、提交并推送文章...');
     const publishArgs = [cliPath, 'publish', ...common];
-    if (inspection.action === 'update') publishArgs.push('--confirm-update');
+    if (isUpdate) publishArgs.push('--confirm-update');
     const publishProcess = await runner(node, publishArgs, { cwd: blogRoot });
     const result = parseResult(publishProcess.stdout);
     if (!result.ok) {

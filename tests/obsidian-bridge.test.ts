@@ -92,6 +92,22 @@ describe('QuickAdd publish bridge', () => {
     expect(spawnProcess).toHaveBeenCalledOnce();
   });
 
+  it('does not publish a new article until the user confirms it', async () => {
+    const obsidian = makeObsidian({ confirm: false });
+    const spawnProcess = vi.fn().mockResolvedValue({
+      code: 0,
+      stdout: '{"ok":true,"action":"create","slug":"docker-deployment"}\n',
+      stderr: '',
+    });
+    obsidian.params.spawnProcess = spawnProcess;
+
+    const result = await publishCurrentNote(obsidian.params);
+
+    expect(result).toMatchObject({ ok: false, code: 'CANCELLED' });
+    expect(obsidian.params.quickAddApi.yesNoPrompt).toHaveBeenCalledOnce();
+    expect(spawnProcess).toHaveBeenCalledOnce();
+  });
+
   it('shows a concise publisher error returned by the CLI', async () => {
     const obsidian = makeObsidian();
     obsidian.params.spawnProcess = async () => ({
