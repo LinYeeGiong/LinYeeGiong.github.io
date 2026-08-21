@@ -36,7 +36,8 @@ describe('Orbitale homepage', () => {
 
   it('renders keyboard-accessible activity cells with real publication counts', () => {
     expect(html).toContain('data-activity-cell');
-    expect(html).toContain('aria-label="2026年8月18日，笔记 1 篇，随笔 0 篇，Daily 0 条，共 1 次发布"');
+    expect(html).toContain('data-notes="0"');
+    expect(html).not.toContain('data-notes="1"');
     expect(html).toContain('data-activity-tooltip');
     expect(html).toContain('data-activity-summary');
   });
